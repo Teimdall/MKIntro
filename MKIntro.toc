@@ -3,8 +3,8 @@
 ## Author: Grosstartine inc.
 ## Version: 1.0
 
-locale.lua
-dungeons.lua
-players.lua
-event.lua
-main.lua
+Locale.lua
+Dungeons.lua
+Players.lua
+Events.lua
+Core.lua

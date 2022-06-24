@@ -1,4 +1,6 @@
-MKplus.dungeons = {
+local addonName, MKIntro = ...
+
+MKIntro.dungeons = {
     ["DoS"]={
         zone_id = 377,
         boss = {
@@ -151,10 +153,10 @@ MKplus.dungeons = {
     }
 }
 
-function MKplus:GetDungeonFromZoneId(id)
-    for index in pairs(MKplus.dungeons) do
-        if MKplus.dungeons[index].zone_id == id then
-            return MKplus.dungeons[index]
+function MKIntro:GetDungeonFromZoneId(id)
+    for index in pairs(self.dungeons) do
+        if self.dungeons[index].zone_id == id then
+            return self.dungeons[index]
         end
     end
 end
