@@ -1,0 +1,10 @@
+## Interface: 90205
+## Title: Mortal Kombat Intro
+## Author: Grosstartine inc.
+## Version: 1.0
+
+locale.lua
+dungeons.lua
+players.lua
+event.lua
+main.lua
