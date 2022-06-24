@@ -364,20 +364,5 @@ function MKIntro:PopulateAffixes(keystone)
 end
 
 function MKIntro:GetKeystoneLevelColor(key_level)
-    local index = 0
-    if key_level >= 2 and key_level < 6 then
-        index = 1
-    elseif key_level >= 6 and key_level < 11 then
-        index = 2
-    elseif key_level >= 11 and key_level < 16 then
-        index = 3
-    elseif key_level >= 16 and key_level < 21 then
-        index = 4
-    elseif key_level >= 21 and key_level < 26 then
-        index = 5
-    else
-        index = 6
-    end
-
-    return ITEM_QUALITY_COLORS[index]
+    return ITEM_QUALITY_COLORS[math.ceil(key_level/5)]
 end
