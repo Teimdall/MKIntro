@@ -19,39 +19,50 @@ function MKIntro:OnInitialize()
     self.number_of_player = 0
     self.players = {}
 
-    self:InitDebugMode()
     self:InitOptions()
+    self:InitDebugMode()
 
     self:SetupDisplay()
     self:RegisterEvents()
 end
 
 function MKIntro:InitDebugMode()
-    self.debug = {
-        enabled = false
-    }
-
     local dungeon_name = "PF"
+    self.debug = {}
     self.debug.dungeon = self.dungeons[dungeon_name]
     self.debug.keystone = {
         map_id = self.dungeons[dungeon_name].zone_id,
         name = "Debug Mode",
         level = 15,
         affixes = {
-            ["1"] = {C_ChallengeMode.GetAffixInfo(117)},
-            ["2"] = {C_ChallengeMode.GetAffixInfo(11)},
-            ["3"] = {C_ChallengeMode.GetAffixInfo(124)}
+            {
+                fileid = ({C_ChallengeMode.GetAffixInfo(117)})[3]
+            },
+            {
+                fileid = ({C_ChallengeMode.GetAffixInfo(11)})[3]
+            },
+            {
+                fileid = ({C_ChallengeMode.GetAffixInfo(124)})[3]
+            }
         }
     }
+
+    if self.ADB.profile.debug.enabled then
+        self:EnableDebugMode()
+    end
+end
+
+function MKIntro:IsDebugModeEnabled()
+    return self.ADB.profile.debug.enabled
 end
 
 function MKIntro:EnableDebugMode()
-    self.debug.enabled = true
+    self.ADB.profile.debug.enabled = true
     self:RegisterEvent("PLAYER_STOPPED_MOVING", "OnChallengeStart")
 end
 
 function MKIntro:DisableDebugMode()
-    self.debug.enabled = false
+    self.ADB.profile.debug.enabled = false
     self:UnregisterEvent("PLAYER_STOPPED_MOVING")
 end
 

@@ -1,7 +1,8 @@
 ## Interface: 90205
 ## Title: Mortal Kombat Intro
 ## Author: Grosstartine inc.
-## Version: 1.0
+## Version: 1.2
+## SavedVariables: MKIntroDB
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
