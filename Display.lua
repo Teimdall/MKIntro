@@ -288,8 +288,8 @@ function MKIntro:CreateVersusFrameAnimation()
 end
 
 function MKIntro:ShowFrame()
-    if not self.IsLayoutModeEnabled then
-         UIParent:Hide()
+    if not self:IsLayoutModeEnabled() then
+        UIParent:Hide()
     end
 
     self.frames.main:Show()
@@ -302,8 +302,8 @@ function MKIntro:ShowFrame()
 end
 
 function MKIntro:HideFrame()
-    if not self.IsLayoutModeEnabled then
-        UIParent:Hide()
+    if not self:IsLayoutModeEnabled() then
+        UIParent:Show()
     end
 
     self.frames.main:Hide()

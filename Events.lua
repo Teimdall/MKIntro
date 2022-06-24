@@ -29,7 +29,9 @@ function MKIntro:PlayAnimations()
 
         C_Timer.After(self.animations.duration*2, function()
             self.animations.groups.versus.group:Play()
-            PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\Sounds\\announcer.mp3", "master")
+            if self.ADB.profile.general.sound.enabled then
+                PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\Sounds\\announcer.mp3", "master")
+            end
         end)
     end)
 end

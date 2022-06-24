@@ -35,6 +35,12 @@ local defaults = {
                     }
                 }
             }
+        },
+        general = {
+            sound = {
+                enabled = true,
+                channel = "master"
+            }
         }
 	}
 }
@@ -42,18 +48,36 @@ local defaults = {
 function MKIntro:InitOptions()
 
     self.is_in_layout_mode = false
-    
+
     local options = {
         type = "group",
-        name = "MKIntro",
+        name = addonName,
         args = {}
+    }
+
+    options.args.general = {
+        name = "General",
+        handler = self,
+        type = "group",
+        order = 2,
+        args = {
+            sound = {
+                type = "toggle",
+                name = "Sound",
+                desc = nil,
+                get = function(info) return self.ADB.profile.general.sound.enabled end,
+                set = function(info, value)
+                    self.ADB.profile.general.sound.enabled = value
+                end
+            }
+        }
     }
 
     options.args.debug = {
         name = "Debug Mode",
         handler = self,
         type = "group",
-        order = 2,
+        order = 3,
         args = {
             debug = {
                 type = "toggle",
@@ -83,7 +107,7 @@ function MKIntro:InitOptions()
         name = "Layout Mode",
         handler = self,
         type = "group",
-        order = 3,
+        order = 4,
         args = {
             display = {
                 type = "toggle",
@@ -91,11 +115,12 @@ function MKIntro:InitOptions()
                 desc = nil,
                 get = function(info) return self.is_in_layout_mode end,
                 set = function(info, value)
-                    self.is_in_layout_mode = value
                     if value then
-                        MKIntro:ShowFrame()
+                        self:EnableLayoutMode()
+                        self:ShowFrame()
                     else
-                        MKIntro:HideFrame()
+                        self:DisableLayoutMode()
+                        self:HideFrame()
                     end
                 end
             }
@@ -107,12 +132,12 @@ function MKIntro:InitOptions()
     local config = LibStub("AceConfig-3.0")
     local dialog = LibStub("AceConfigDialog-3.0")
 
-    config:RegisterOptionsTable("MKIntro", options)
-    self.options = dialog:AddToBlizOptions("MKIntro", options.name)
+    config:RegisterOptionsTable(addonName, options)
+    self.options = dialog:AddToBlizOptions(addonName, options.name)
 
     config:RegisterOptionsTable("MKIntro-DebugMode", options.args.debug)
-	dialog:AddToBlizOptions("MKIntro-DebugMode", options.args.debug.name, "MKIntro")
+	dialog:AddToBlizOptions("MKIntro-DebugMode", options.args.debug.name, addonName)
 
     config:RegisterOptionsTable("MKIntro-LayoutMode", options.args.layout)
-	dialog:AddToBlizOptions("MKIntro-LayoutMode", options.args.layout.name, "MKIntro")
+	dialog:AddToBlizOptions("MKIntro-LayoutMode", options.args.layout.name, addonName)
 end
