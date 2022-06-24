@@ -13,7 +13,7 @@ function MKIntro:GetRoleIcon(role)
 end
 
 function MKIntro:OnInspectUpdate(event, guid, unit, info)
-    local unit_name = self.LI:GuidToUnit(guid)
+    local unit_name = self.LGI:GuidToUnit(guid)
 
     --Clear info for guid
     self:RemovePlayer(guid)
@@ -56,7 +56,7 @@ function MKIntro:OnInspectRemove (event, guid)
 end
 
 function MKIntro:RemovePlayer(guid)
-    local unit_name = self.LI:GuidToUnit(guid)
+    local unit_name = self.LGI:GuidToUnit(guid)
     --Clear info for guid
     if self.players[unit_name] ~= nil then
         self.players[unit_name] = nil

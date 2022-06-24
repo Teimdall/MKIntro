@@ -1,33 +1,5 @@
 local addonName, MKIntro = ...
 
-function MKIntro:PopulateFrames()
-    for index, unit in ipairs(self.unit_names) do
-        self:PopulatePlayerFrame(unit)
-    end
-
-    local keystone = self:GetActiveKeystoneInfo()
-    self:PopulateBossFrame(keystone)
-end
-
-function MKIntro:GetActiveKeystoneInfo()
-    local keystone = {}
-
-    keystone.map_id = C_ChallengeMode.GetActiveChallengeMapID()
-    local name, _, _, _, _ = C_ChallengeMode.GetMapUIInfo(keystone.map_id)
-    keystone.name = name
-
-    local level, affixes, _  = C_ChallengeMode.GetActiveKeystoneInfo()
-    keystone.level = level
-
-    keystone.affixes = {}
-    for i, affixID in ipairs(affixes) do
-        keystone.affixes[i] = {}
-        keystone.affixes[i].name, _, keystone.affixes[i].fileid = C_ChallengeMode.GetAffixInfo(affixID)
-    end
-
-    return keystone
-end
-
 function MKIntro:ShowFrame()
     UIParent:Hide()
     self.frames.main:Show()
@@ -79,7 +51,7 @@ function MKIntro:PlayAnimations()
 end
 
 function MKIntro:RegisterEvents()
-    if self.debug then
+    if self.debug.enabled then
         self:RegisterEvent("PLAYER_STOPPED_MOVING", "OnChallengeStart")
     end
 

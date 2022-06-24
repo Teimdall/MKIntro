@@ -1,1 +1,2 @@
-MKplus = {}
+local addonName, MKIntro = ...
+local L = MKIntro.L

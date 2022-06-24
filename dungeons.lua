@@ -154,9 +154,36 @@ MKIntro.dungeons = {
 }
 
 function MKIntro:GetDungeonFromZoneId(id)
+    if self.debug.enabled then return self.debug.dungeon end
+
     for index in pairs(self.dungeons) do
         if self.dungeons[index].zone_id == id then
             return self.dungeons[index]
         end
     end
+end
+
+function MKIntro:GetKeystoneLevelColor(key_level)
+    return ITEM_QUALITY_COLORS[math.ceil(key_level/5)]
+end
+
+function MKIntro:GetActiveKeystoneInfo()
+    if self.debug.enabled then return self.debug.keystone end
+
+    local keystone = {}
+
+    keystone.map_id = C_ChallengeMode.GetActiveChallengeMapID()
+    local name, _, _, _, _ = C_ChallengeMode.GetMapUIInfo(keystone.map_id)
+    keystone.name = name
+
+    local level, affixes, _  = C_ChallengeMode.GetActiveKeystoneInfo()
+    keystone.level = level
+
+    keystone.affixes = {}
+    for i, affixID in ipairs(affixes) do
+        keystone.affixes[i] = {}
+        keystone.affixes[i].name, _, keystone.affixes[i].fileid = C_ChallengeMode.GetAffixInfo(affixID)
+    end
+
+    return keystone
 end

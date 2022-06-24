@@ -1,28 +1,50 @@
 local addonName, MKIntro = ...
 
-LibStub("AceAddon-3.0"):NewAddon(MKIntro, "MKIntro", "AceConsole-3.0", "AceEvent-3.0")
+addonName = "MKIntro"
+LibStub("AceAddon-3.0"):NewAddon(MKIntro, addonName, "AceConsole-3.0", "AceEvent-3.0")
+MKIntro.L = LibStub("AceLocale-3.0"):GetLocale(addonName, true)
+
+MKIntro.LGI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
 function MKIntro:OnInitialize()
-    self.debug = false
+    self.debug = {
+        enabled = false
+    }
 
-    self.LI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
+    self.LGI.RegisterCallback (MKIntro, "GroupInSpecT_Update", "OnInspectUpdate")
+    self.LGI.RegisterCallback (MKIntro, "GroupInSpecT_Remove", "OnInspectRemove")
 
-    self.LI.RegisterCallback (MKIntro, "GroupInSpecT_Update", "OnInspectUpdate")
-    self.LI.RegisterCallback (MKIntro, "GroupInSpecT_Remove", "OnInspectRemove")
-
-    self:RegisterEvents()
+    
 
     self.frames = {}
     self.animations = {}
     self.models = {}
 
     self.keystone_started = false
-
     self.unit_names = {"player", "party1", "party2", "party3", "party4"}
     self.number_of_player = 0
     self.players = {}
 
-    MKIntro:SetupDisplay()
+    if self.debug.enabled then
+        self:SetupDebugMode()
+    end
+    self:SetupDisplay()
+    self:RegisterEvents()
+end
+
+function MKIntro:SetupDebugMode()
+    local dungeon_name = "PF"
+    self.debug.dungeon = self.dungeons[dungeon_name]
+    self.debug.keystone = {
+        map_id = self.dungeons[dungeon_name].zone_id,
+        name = "Debug Mode",
+        level = 15,
+        affixes = {
+            ["1"] = {C_ChallengeMode.GetAffixInfo(117)},
+            ["2"] = {C_ChallengeMode.GetAffixInfo(11)},
+            ["3"] = {C_ChallengeMode.GetAffixInfo(124)}
+        }
+    }
 end
 
 function MKIntro:OnEnable()
@@ -31,6 +53,14 @@ end
 
 function MKIntro:OnDisable()
 	-- Called when the addon is disabled
+end
+
+function MKIntro:PopulateFrames()
+    for index, unit in ipairs(self.unit_names) do
+        self:PopulatePlayerFrame(unit)
+    end
+
+    self:PopulateBossFrame(self:GetActiveKeystoneInfo())
 end
 
 function MKIntro:PopulatePlayerFrame(unit)
@@ -83,8 +113,4 @@ function MKIntro:PopulateAffixes(keystone)
     for i, affix in ipairs(keystone.affixes) do
         self.frames.affixes[i].texture:SetTexture(affix.fileid)
     end
-end
-
-function MKIntro:GetKeystoneLevelColor(key_level)
-    return ITEM_QUALITY_COLORS[math.ceil(key_level/5)]
 end
