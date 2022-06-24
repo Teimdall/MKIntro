@@ -3,11 +3,11 @@ local addonName, MKIntro = ...
 function MKIntro:GetRoleIcon(role)
     local role_texture_id
     if role == "TANK" then
-        role_texture_id = "Interface\\AddOns\\ElvUI\\Core\\Media\\Textures\\Tank.tga"
+        role_texture_id = "Interface\\AddOns\\MKIntro\\Media\\Textures\\Tank.tga"
     elseif role == "HEALER" then
-        role_texture_id = "Interface\\AddOns\\ElvUI\\Core\\Media\\Textures\\Healer.tga"
+        role_texture_id = "Interface\\AddOns\\MKIntro\\Media\\Textures\\Healer.tga"
     else
-        role_texture_id = "Interface\\AddOns\\ElvUI\\Core\\Media\\Textures\\DPS.tga"
+        role_texture_id = "Interface\\AddOns\\MKIntro\\Media\\Textures\\DPS.tga"
     end
     return role_texture_id
 end
