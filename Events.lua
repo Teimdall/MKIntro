@@ -1,21 +1,5 @@
 local addonName, MKIntro = ...
 
-function MKIntro:ShowFrame()
-    UIParent:Hide()
-    self.frames.main:Show()
-    for index, affix in ipairs(self.frames.affixes) do
-        affix:Hide()
-    end
-    for index, affix in ipairs(self:GetActiveKeystoneInfo().affixes) do
-        self.frames.affixes[index]:Show()
-    end
-end
-
-function MKIntro:HideFrame()
-    UIParent:Show()
-    self.frames.main:Hide()
-end
-
 function MKIntro:OnChallengeStart(event)
     if self.keystone_started then return end
 

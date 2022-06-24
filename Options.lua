@@ -40,6 +40,9 @@ local defaults = {
 }
 
 function MKIntro:InitOptions()
+
+    self.is_in_layout_mode = false
+    
     local options = {
         type = "group",
         name = "MKIntro",
@@ -76,6 +79,29 @@ function MKIntro:InitOptions()
         }
     }
 
+    options.args.layout = {
+        name = "Layout Mode",
+        handler = self,
+        type = "group",
+        order = 3,
+        args = {
+            display = {
+                type = "toggle",
+                name = "Layout Mode",
+                desc = nil,
+                get = function(info) return self.is_in_layout_mode end,
+                set = function(info, value)
+                    self.is_in_layout_mode = value
+                    if value then
+                        MKIntro:ShowFrame()
+                    else
+                        MKIntro:HideFrame()
+                    end
+                end
+            }
+        }
+    }
+
     self.ADB = LibStub("AceDB-3.0"):New(addonName .. "DB", defaults)
 
     local config = LibStub("AceConfig-3.0")
@@ -83,6 +109,10 @@ function MKIntro:InitOptions()
 
     config:RegisterOptionsTable("MKIntro", options)
     self.options = dialog:AddToBlizOptions("MKIntro", options.name)
+
     config:RegisterOptionsTable("MKIntro-DebugMode", options.args.debug)
 	dialog:AddToBlizOptions("MKIntro-DebugMode", options.args.debug.name, "MKIntro")
+
+    config:RegisterOptionsTable("MKIntro-LayoutMode", options.args.layout)
+	dialog:AddToBlizOptions("MKIntro-LayoutMode", options.args.layout.name, "MKIntro")
 end

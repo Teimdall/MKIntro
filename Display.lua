@@ -286,3 +286,25 @@ function MKIntro:CreateVersusFrameAnimation()
         end
     end)
 end
+
+function MKIntro:ShowFrame()
+    if not self.IsLayoutModeEnabled then
+         UIParent:Hide()
+    end
+
+    self.frames.main:Show()
+    for index, affix in ipairs(self.frames.affixes) do
+        affix:Hide()
+    end
+    for index, affix in ipairs(self:GetActiveKeystoneInfo().affixes) do
+        self.frames.affixes[index]:Show()
+    end
+end
+
+function MKIntro:HideFrame()
+    if not self.IsLayoutModeEnabled then
+        UIParent:Hide()
+    end
+
+    self.frames.main:Hide()
+end

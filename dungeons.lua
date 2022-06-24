@@ -154,7 +154,9 @@ MKIntro.dungeons = {
 }
 
 function MKIntro:GetDungeonFromZoneId(id)
-    if self:IsDebugModeEnabled() then return MKIntro.ADB.profile.debug.dungeon end
+    if self:IsDebugModeEnabled() or self:IsLayoutModeEnabled() then
+        return MKIntro.ADB.profile.debug.dungeon
+    end
 
     for index in pairs(self.dungeons) do
         if self.dungeons[index].zone_id == id then
@@ -168,7 +170,9 @@ function MKIntro:GetKeystoneLevelColor(key_level)
 end
 
 function MKIntro:GetActiveKeystoneInfo()
-    if self:IsDebugModeEnabled() then return MKIntro.ADB.profile.debug.keystone end
+    if self:IsDebugModeEnabled() or self:IsLayoutModeEnabled() then
+        return MKIntro.ADB.profile.debug.keystone
+    end
 
     local keystone = {}
 
