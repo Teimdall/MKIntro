@@ -51,10 +51,6 @@ function MKIntro:PlayAnimations()
 end
 
 function MKIntro:RegisterEvents()
-    if self.debug.enabled then
-        self:RegisterEvent("PLAYER_STOPPED_MOVING", "OnChallengeStart")
-    end
-
     self:RegisterEvent("CHALLENGE_MODE_START", "OnChallengeStart")
     self:RegisterEvent("CHALLENGE_MODE_COMPLETED", "ResetState")
     self:RegisterEvent("CHALLENGE_MODE_KEYSTONE_SLOTTED", "ResetState")

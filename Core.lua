@@ -7,14 +7,8 @@ MKIntro.L = LibStub("AceLocale-3.0"):GetLocale(addonName, true)
 MKIntro.LGI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
 function MKIntro:OnInitialize()
-    self.debug = {
-        enabled = false
-    }
-
     self.LGI.RegisterCallback (MKIntro, "GroupInSpecT_Update", "OnInspectUpdate")
     self.LGI.RegisterCallback (MKIntro, "GroupInSpecT_Remove", "OnInspectRemove")
-
-    
 
     self.frames = {}
     self.animations = {}
@@ -25,14 +19,18 @@ function MKIntro:OnInitialize()
     self.number_of_player = 0
     self.players = {}
 
-    if self.debug.enabled then
-        self:SetupDebugMode()
-    end
+    self:InitDebugMode()
+    self:InitOptions()
+
     self:SetupDisplay()
     self:RegisterEvents()
 end
 
-function MKIntro:SetupDebugMode()
+function MKIntro:InitDebugMode()
+    self.debug = {
+        enabled = false
+    }
+
     local dungeon_name = "PF"
     self.debug.dungeon = self.dungeons[dungeon_name]
     self.debug.keystone = {
@@ -45,6 +43,16 @@ function MKIntro:SetupDebugMode()
             ["3"] = {C_ChallengeMode.GetAffixInfo(124)}
         }
     }
+end
+
+function MKIntro:EnableDebugMode()
+    self.debug.enabled = true
+    self:RegisterEvent("PLAYER_STOPPED_MOVING", "OnChallengeStart")
+end
+
+function MKIntro:DisableDebugMode()
+    self.debug.enabled = false
+    self:UnregisterEvent("PLAYER_STOPPED_MOVING")
 end
 
 function MKIntro:OnEnable()
