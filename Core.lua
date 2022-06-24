@@ -3,7 +3,7 @@ local addonName, MKIntro = ...
 LibStub("AceAddon-3.0"):NewAddon(MKIntro, "MKIntro", "AceConsole-3.0", "AceEvent-3.0")
 
 function MKIntro:OnInitialize()
-    self.debug = true
+    self.debug = false
 
     self.LI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
