@@ -351,6 +351,8 @@ function MKIntro:PopulateBossFrame(keystone)
 
     self.frames.boss.text:SetText(keystone.name)
     self.frames.keystone.text:SetText( "+" .. keystone.level)
+    local level_color = self:GetKeystoneLevelColor(keystone.level)
+    self.frames.keystone.text:SetTextColor(level_color.r, level_color.g, level_color.b, level_color.a)
 
     self:PopulateAffixes(keystone)
 end
@@ -359,4 +361,23 @@ function MKIntro:PopulateAffixes(keystone)
     for i, affix in ipairs(keystone.affixes) do
         self.frames.affixes[i].texture:SetTexture(affix.fileid)
     end
+end
+
+function MKIntro:GetKeystoneLevelColor(key_level)
+    local index = 0
+    if key_level >= 2 and key_level < 6 then
+        index = 1
+    elseif key_level >= 6 and key_level < 11 then
+        index = 2
+    elseif key_level >= 11 and key_level < 16 then
+        index = 3
+    elseif key_level >= 16 and key_level < 21 then
+        index = 4
+    elseif key_level >= 21 and key_level < 26 then
+        index = 5
+    else
+        index = 6
+    end
+
+    return ITEM_QUALITY_COLORS[index]
 end
