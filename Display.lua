@@ -39,7 +39,7 @@ end
 
 function MKIntro:CreateMainFrame()
     local main
-    main = CreateFrame("Frame", nil, nil)
+    main = CreateFrame("Frame", addonName, nil)
     main:SetSize(
         GetScreenHeight(),
         GetScreenWidth()

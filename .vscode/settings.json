@@ -1,0 +1,15 @@
+{
+    "Lua.diagnostics.globals": [
+        "LibStub",
+        "C_ChallengeMode",
+        "C_ClassColor",
+        "CreateFrame",
+        "GetScreenHeight",
+        "GetScreenWidth",
+        "ITEM_QUALITY_COLORS",
+        "C_Timer",
+        "UIParent",
+        "PlaySoundFile",
+        "C_PlayerInfo"
+    ]
+}
