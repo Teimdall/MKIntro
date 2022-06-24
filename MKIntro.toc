@@ -7,4 +7,5 @@ Locale.lua
 Dungeons.lua
 Players.lua
 Events.lua
+Display.lua
 Core.lua
