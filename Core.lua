@@ -60,6 +60,14 @@ function MKIntro:IsLayoutModeEnabled()
     return self.is_in_layout_mode
 end
 
+function MKIntro:EnableLayoutMode()
+    self.is_in_layout_mode = true
+end
+
+function MKIntro:DisableLayoutMode()
+    self.is_in_layout_mode = false
+end
+
 function MKIntro:EnableDebugMode()
     self.ADB.profile.debug.enabled = true
     self:RegisterEvent("PLAYER_STOPPED_MOVING", "OnChallengeStart")
