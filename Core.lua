@@ -3,7 +3,7 @@ local addonName, MKIntro = ...
 LibStub("AceAddon-3.0"):NewAddon(MKIntro, "MKIntro", "AceConsole-3.0", "AceEvent-3.0")
 
 function MKIntro:OnInitialize()
-    self.debug = false
+    self.debug = true
 
     self.LI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
@@ -99,7 +99,7 @@ function MKIntro:CreateBossFrame()
     --Name text
     local name_text = boss_frame:CreateFontString(nil,"ARTWORK") 
     name_text:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\Rocks.ttf", 60, "OUTLINE")
-    name_text:SetPoint("RIGHT", -400, -10)
+    name_text:SetPoint("RIGHT", -400, 10)
     boss_frame.text = name_text
 
     --Boss actor frame
