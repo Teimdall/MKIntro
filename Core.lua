@@ -3,7 +3,7 @@ local addonName, MKIntro = ...
 LibStub("AceAddon-3.0"):NewAddon(MKIntro, "MKIntro", "AceConsole-3.0", "AceEvent-3.0")
 
 function MKIntro:OnInitialize()
-    self.debug = true
+    self.debug = false
 
     self.LI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
@@ -258,13 +258,13 @@ function MKIntro:CreateAnimations()
         animation:SetDuration(self.animations.duration)
         animation:SetOffset(self.animations.groups.players.xoffset, self.animations.groups.players.yoffset)
 
-        animation:SetScript("OnUpdate", function(self, elapsed)
-            if self:IsDone() then
-                local point, relativeTo, relativePoint, xOfs, yOfs = MKIntro.frames.players[unit].main:GetPoint(1)
-                MKIntro.frames.players[unit].main:SetPoint(
+        animation:SetScript("OnUpdate", function(ev, elapsed)
+            if ev:IsDone() then
+                local point, relativeTo, relativePoint, xOfs, yOfs = self.frames.players[unit].main:GetPoint(1)
+                self.frames.players[unit].main:SetPoint(
                     "TOPLEFT",
-                    xOfs+MKIntro.animations.groups.players.xoffset,
-                    yOfs+MKIntro.animations.groups.players.yoffset)
+                    xOfs+self.animations.groups.players.xoffset,
+                    yOfs+self.animations.groups.players.yoffset)
             end
         end)
     end
@@ -276,13 +276,13 @@ function MKIntro:CreateAnimations()
     boss_animation:SetDuration(self.animations.duration)
     boss_animation:SetOffset(self.animations.groups.boss.xoffset, self.animations.groups.boss.yoffset)
 
-    boss_animation:SetScript("OnUpdate", function(self, elapsed)
-        if self:IsDone() then
-            local point, relativeTo, relativePoint, xOfs, yOfs = MKIntro.frames.boss:GetPoint(1)
-            MKIntro.frames.boss:SetPoint(
+    boss_animation:SetScript("OnUpdate", function(ev, elapsed)
+        if ev:IsDone() then
+            local point, relativeTo, relativePoint, xOfs, yOfs = self.frames.boss:GetPoint(1)
+            self.frames.boss:SetPoint(
                 "RIGHT",
-                xOfs+MKIntro.animations.groups.boss.xoffset,
-                yOfs+MKIntro.animations.groups.boss.yoffset
+                xOfs+self.animations.groups.boss.xoffset,
+                yOfs+self.animations.groups.boss.yoffset
             )
         end
     end)
@@ -294,17 +294,17 @@ function MKIntro:CreateAnimations()
     versus_animation:SetDuration(self.animations.duration)
     versus_animation:SetOffset(self.animations.groups.versus.xoffset, self.animations.groups.versus.yoffset)
 
-    versus_animation:SetScript("OnUpdate", function(self, elapsed)
-        if self:IsDone() then
-            local point, relativeTo, relativePoint, xOfs, yOfs = MKIntro.frames.versus:GetPoint(1)
-            MKIntro.frames.versus:SetPoint(
+    versus_animation:SetScript("OnUpdate", function(ev, elapsed)
+        if ev:IsDone() then
+            local point, relativeTo, relativePoint, xOfs, yOfs = self.frames.versus:GetPoint(1)
+            self.frames.versus:SetPoint(
                 "TOP",
-                xOfs+MKIntro.animations.groups.versus.xoffset,
-                yOfs+MKIntro.animations.groups.versus.yoffset
+                xOfs+self.animations.groups.versus.xoffset,
+                yOfs+self.animations.groups.versus.yoffset
             )
 
-            if MKIntro.debug then
-                MKIntro.keystone_started = false
+            if self.debug then
+                self.keystone_started = false
             end
         end
     end)
