@@ -46,10 +46,12 @@ end
 
 function MKIntro:OnChallengeStart()
     if MKIntro.keystone_started or not C_ChallengeMode.IsChallengeModeActive() then return end
+
     MKIntro.keystone_started = true
     MKIntro:PopulateFrames()
     MKIntro:ShowFrame()
     MKIntro:PlayAnimations()
+    
     C_Timer.After(6, function()
         MKIntro:HideFrame()
         MKIntro:ResetFramesPositionsFromAnimations()
@@ -77,8 +79,11 @@ function MKIntro:PlayAnimations()
 end
 
 function MKIntro:RegisterEvents()
+    if self.debug then
+        self:RegisterEvent("PLAYER_STOPPED_MOVING", self.OnChallengeStart)
+    end
+
     self:RegisterEvent("CHALLENGE_MODE_START", self.OnChallengeStart)
-    self:RegisterEvent("PLAYER_STOPPED_MOVING", self.OnChallengeStart)
     self:RegisterEvent("CHALLENGE_MODE_COMPLETED", self.ResetState)
     self:RegisterEvent("CHALLENGE_MODE_KEYSTONE_SLOTTED", self.ResetState)
 end

@@ -3,6 +3,8 @@ local addonName, MKIntro = ...
 LibStub("AceAddon-3.0"):NewAddon(MKIntro, "MKIntro", "AceConsole-3.0", "AceEvent-3.0")
 
 function MKIntro:OnInitialize()
+    self.debug = true
+
     self.LI = LibStub:GetLibrary("LibGroupInSpecT-1.1")
 
     self.LI.RegisterCallback (MKIntro, "GroupInSpecT_Update", "OnInspectUpdate")
@@ -22,8 +24,6 @@ function MKIntro:OnInitialize()
 
     MKIntro:CreateFrames()
     MKIntro:CreateAnimations()
-
-    print("init")
 end
 
 function MKIntro:OnEnable()
@@ -204,16 +204,6 @@ function MKIntro:CreatePlayerFrames()
 
         posY = posY-180
     end
-
-    --f:RegisterEvent("CHALLENGE_MODE_KEYSTONE_SLOTTED")
-    --f:SetScript("OnEvent", function(self, event, ...)
-        --UIParent:Hide()
-        --f:Show()
-        --C_Timer.After(5, function(self)
-            --UIParent:Show()
-            --f:Hide()
-        --end)
-    --end)
 end
 
 function MKIntro:ResetFramesPositionsFromAnimations()
@@ -312,6 +302,10 @@ function MKIntro:CreateAnimations()
                 xOfs+MKIntro.animations.groups.versus.xoffset,
                 yOfs+MKIntro.animations.groups.versus.yoffset
             )
+
+            if MKIntro.debug then
+                MKIntro.keystone_started = false
+            end
         end
     end)
     
