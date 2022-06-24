@@ -59,7 +59,7 @@ end
 function MKIntro:CreateVersusFrame()
     local versus_frame = CreateFrame("Frame", nil, self.frames.main)
     local versus_texture = versus_frame:CreateTexture()
-    versus_texture:SetTexture("Interface\\AddOns\\MKIntro\\Media\\versus-t.tga")
+    versus_texture:SetTexture("Interface\\AddOns\\MKIntro\\Media\\Textures\\Versus.tga")
     versus_texture:SetAllPoints()
     versus_frame:SetPoint("TOP", 0, 750)
     versus_frame:SetSize(512,512)
@@ -90,7 +90,7 @@ function MKIntro:CreateBossFrame()
 
     --Background texture
     local background_texture = boss_frame:CreateTexture()
-    background_texture:SetTexture("Interface\\AddOns\\WeakAuras\\Media\\Textures\\Square_AlphaGradient.tga")
+    background_texture:SetTexture("Interface\\AddOns\\MKIntro\\Media\\Textures\\Square_AlphaGradient.tga")
     background_texture:SetPoint("CENTER", 0, -50)
     background_texture:SetSize(1500,150)
     background_texture:SetRotation(math.pi)
@@ -98,7 +98,7 @@ function MKIntro:CreateBossFrame()
 
     --Name text
     local name_text = boss_frame:CreateFontString(nil,"ARTWORK") 
-    name_text:SetFont("Interface\\AddOns\\MKIntro\\Fonts\\Rocks.ttf", 60, "OUTLINE")
+    name_text:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\Rocks.ttf", 60, "OUTLINE")
     name_text:SetPoint("RIGHT", -400, -10)
     boss_frame.text = name_text
 
@@ -115,7 +115,7 @@ function MKIntro:CreateBossFrame()
     keylevel_frame:SetSize(100,50)
 
     local keylevel_text = keylevel_frame:CreateFontString(nil,"ARTWORK")
-    keylevel_text:SetFont("Interface\\AddOns\\MKIntro\\Fonts\\Cabin.ttf", 60, "OUTLINE")
+    keylevel_text:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\Cabin.ttf", 60, "OUTLINE")
     keylevel_text:SetAllPoints()
     keylevel_frame.text = keylevel_text
 
@@ -137,14 +137,14 @@ function MKIntro:CreatePlayerFrames()
 
         --Background texture
         local background_texture = player_frame:CreateTexture()
-        background_texture:SetTexture("Interface\\AddOns\\WeakAuras\\Media\\Textures\\Square_AlphaGradient.tga")
+        background_texture:SetTexture("Interface\\AddOns\\MKIntro\\Media\\Textures\\Square_AlphaGradient.tga")
         background_texture:SetPoint("CENTER", 0, 0)
         background_texture:SetSize(900,120)
         player_frame.texture = background_texture   
 
         --Name text
         local name_text = player_frame:CreateFontString(nil,"ARTWORK")
-        name_text:SetFont("Interface\\AddOns\\MKIntro\\Fonts\\MK4.ttf", 50, "OUTLINE")
+        name_text:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\MK4.ttf", 50, "OUTLINE")
         name_text:SetPoint("LEFT", 270, 30)
         player_frame.text = name_text
 
@@ -171,7 +171,7 @@ function MKIntro:CreatePlayerFrames()
         --Spec setup text
         local text_spec_frame = CreateFrame("Frame", nil, player_frame)
         local text_spec = text_spec_frame:CreateFontString(nil,"ARTWORK") 
-        text_spec:SetFont("Interface\\AddOns\\MKIntro\\Fonts\\Cabin.ttf", 25, "OUTLINE")
+        text_spec:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\Cabin.ttf", 25, "OUTLINE")
         text_spec:SetPoint("LEFT", 0, 0)
         text_spec_frame:SetPoint("LEFT", 310, -20)
         text_spec_frame:SetSize(100,40)
@@ -193,7 +193,7 @@ function MKIntro:CreatePlayerFrames()
         --M+ rating setup
         local rating_frame = CreateFrame("Frame", nil, player_frame)
         local rating_text = rating_frame:CreateFontString(nil,"ARTWORK") 
-        rating_text:SetFont("Interface\\AddOns\\MKIntro\\Fonts\\Cabin.ttf", 25, "OUTLINE")
+        rating_text:SetFont("Interface\\AddOns\\MKIntro\\Media\\Fonts\\Cabin.ttf", 25, "OUTLINE")
         rating_text:SetPoint("LEFT", 0, 0)
         rating_frame:SetPoint("LEFT", 550, -20)
         rating_frame:SetSize(100,50)

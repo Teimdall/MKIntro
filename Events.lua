@@ -51,7 +51,7 @@ function MKIntro:OnChallengeStart()
     MKIntro:PopulateFrames()
     MKIntro:ShowFrame()
     MKIntro:PlayAnimations()
-    
+
     C_Timer.After(6, function()
         MKIntro:HideFrame()
         MKIntro:ResetFramesPositionsFromAnimations()
@@ -65,15 +65,15 @@ end
 function MKIntro:PlayAnimations()
     for index, unit in ipairs(self.unit_names) do
         self.animations.groups.players[unit]:Play()
-        PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\whoosh.mp3", "master")
+        PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\Sounds\\whoosh.mp3", "master")
     end
     C_Timer.After(self.animations.duration*2, function()
         self.animations.groups.boss.group:Play()
-        PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\whoosh.mp3", "master")
+        PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\Sounds\\whoosh.mp3", "master")
 
         C_Timer.After(self.animations.duration*2, function()
             self.animations.groups.versus.group:Play()
-            PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\announcer.mp3", "master")
+            PlaySoundFile("Interface\\AddOns\\MKIntro\\Media\\Sounds\\announcer.mp3", "master")
         end)
     end)
 end
